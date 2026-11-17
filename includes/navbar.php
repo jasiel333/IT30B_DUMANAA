@@ -4,6 +4,13 @@ $currentSection = $_GET['section'] ?? 'dashboard';
 function navActive($section, $currentSection){
     return $section === $currentSection ? 'active' : '';
 }
+
+// ---------- 1. KPI COUNTS ----------
+$studentCount  = $pdo->query("SELECT COUNT(*) FROM students")->fetchColumn();
+$bookCount     = $pdo->query("SELECT COUNT(*) FROM books")->fetchColumn();
+$totalBorrows  = $pdo->query("SELECT COUNT(*) FROM borrow")->fetchColumn();
+$activeBorrows = $pdo->query("SELECT COUNT(*) FROM borrow WHERE borrow_return_date IS NULL")->fetchColumn();
+
 ?>
 
 <!-- Material Icon -->

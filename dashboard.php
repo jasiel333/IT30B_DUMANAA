@@ -1,12 +1,12 @@
 <?php 
 
-$host = 'localhost';
-$db   = 'it30_lab_db';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+$host = "localhost";
+$db   = "it30b_lab_db";
+$user = "root";
+$pass = "";
+$charset = "utf8mb4";
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$dsn = "mysql:host=$host;port=3306;dbname=$db;charset=$charset";
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -45,7 +45,7 @@ try {
             align-items: center;
         }
         
-        .dashboard { max-width: 1300px; width: 100%; }
+        .dashboard { max-width: 1300px; width: 100%; margin: 0 auto; }
 
         /* Materialize Standard Card */
         .stat-card, .chart-card, .recent-borrows {
@@ -64,10 +64,12 @@ try {
 
         /* ---- KPI CARDS ---- */
         .stats-grid {
+            width: 100%;
+            max-width: 1300px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.25rem;
-            margin-bottom: 2rem;
+            margin-bottom: 24px;
         }
         .stat-card {
             padding: 1.5rem;
@@ -110,12 +112,17 @@ try {
 
         /* ---- CHARTS ---- */
         .charts-grid {
+            width: 100%;
+            max-width: 1300px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0 auto 2rem;
         }
         .chart-card {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
             padding: 1.5rem;
         }
         .chart-title {
@@ -256,7 +263,7 @@ try {
 
         @media (max-width: 760px) {
             .charts-grid { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns:  repeat(2, 1fr); }
             .borrow-student,
             .borrow-book { width: auto; flex: 1; }
             .borrow-row { flex-wrap: wrap; gap: 0.5rem; }

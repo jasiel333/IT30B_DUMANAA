@@ -304,6 +304,91 @@ try {
         <div class="stat-sub">not returned</div>
     </div>
 </div>
+
+<!-- CHARTS -->
+<div class="charts-grid">
+
+    <!-- Pie Chart - Book Categories-->
+    <div class="chart-card">
+        <div class="chart-title">
+            Books by category
+            <span>
+                <span class="material-icons">category</span>
+                collection
+            </span>
+        </div>
+        <canvas id="categoryChart" width="400" height="200"></canvas>
+    </div>
+
+</div>
     
 </body>
+
+<script>
+    (function() {
+        // Materialize standard palette
+        const colors = {
+            blue: '#1976d2',
+            green: '#4caf50',
+            orange: '#ff9800',
+            red: '#f44336',
+            purple: '#9c27b0',
+            grey: '#9e9e9e'
+        };
+
+        // ---------- DOUGHNUT : BOOKS BY CATEGORY ----------
+        const catCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(catCtx, {
+            type: 'doughnut',
+            data: {
+                labels: <?= json_encode($categories) ?>,
+                datasets: [{
+                    data: <?= json_encode($categoryCounts) ?>,
+                    backgroundColor: [
+                        colors.blue, colors.green, colors.orange, colors.red, colors.purple, colors.grey
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            boxHeight: 12,
+                            usePointStyle: false, // Materialize usually uses squares
+                            padding: 16,
+                            font: { size: 12, family: 'Roboto' },
+                            color: '#616161'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#212121',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        padding: 10,
+                        cornerRadius: 4,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
+                                return ` ${label}: ${value} (${pct}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    })();
+</script>
+
 </html>

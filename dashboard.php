@@ -328,7 +328,7 @@ $recentBorrows = $recentStmt->fetchAll();
 <body>
 
     <?php include 'includes/navbar.php' ?>
-
+<div class="dashboard">
     <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
@@ -498,7 +498,6 @@ $recentBorrows = $recentStmt->fetchAll();
                 }
             }
         });
-    })();
     // ---------- BAR: BORROWS LAST 7 DAYS ----------
 
 const borrowCtx = document
@@ -576,6 +575,9 @@ new Chart(borrowCtx, {
         }
     }
 });
+
+ })();
+
 </script>
 
 </html>

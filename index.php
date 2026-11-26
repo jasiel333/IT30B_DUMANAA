@@ -362,6 +362,7 @@ $action = $_GET['action'] ?? '';
         <a href="index.php?section=students">Students</a>
         <a href="index.php?section=books">Books</a>
         <a href="index.php?section=borrow">Borrow</a>
+        <a href="dashboard.php">Dashboard</a>
     </nav>
 
     <hr>
